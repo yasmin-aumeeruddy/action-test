@@ -250,9 +250,8 @@ public class GuideConverter{
                         writeToFile("````\n"+inputLine+"```\n{codeblock}",guideName);
                         continue;
                     }
-                    else{
-                        position = "main";
-                    }
+                    position = "main";
+                    
                 }
 
                 //finds title and skips over irrelevant lines
