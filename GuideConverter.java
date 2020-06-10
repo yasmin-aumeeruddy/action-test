@@ -242,7 +242,7 @@ public class GuideConverter{
                 }
                 
                 if(position.equals("code")){
-                    if(inputLine.equals("----"){
+                    if(inputLine.equals("----")){
                         writeToFile("```",guideName);
                         continue;
                     }
