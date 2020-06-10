@@ -245,6 +245,7 @@ public class GuideConverter{
                     if(inputLine.equals("----"){
                         writeToFile("```",guideName);
                         continue;
+                    }
                     elif(inputLine.startsWith("mvn")){
                         writeToFile("````\n"+inputLine+"```\n{codeblock}",guideName);
                         continue;
