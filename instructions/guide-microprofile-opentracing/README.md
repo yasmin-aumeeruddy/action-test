@@ -139,12 +139,8 @@ If you want to install this feature yourself, see
 in the IBM Knowledge Centre.
 
 server.xml
-```
-```
 
 pom.xml
-```
-```
 
 
 ## Enabling distributed tracing
@@ -161,8 +157,6 @@ Because tracing of all JAX-RS methods is enabled by default, you need only to en
 Both of these features are already enabled in the **inventory** and **system** configuration files.
 
 server.xml
-```
-```
 
 
 Make sure that your services are running. Then, simply point your browser to any of their endpoints and
@@ -186,15 +180,11 @@ form: **<package name>.<class name>.<method name>**. If you use this parameter a
 all methods within that class will have the same span name unless they are explicitly overridden by
 another **@Traced** annotation.
 
-```
 #Update the **InventoryManager** class.#
 **inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java**
-```
 Enable tracing of the **@Traced** as shown.
 
 InventoryManager.java
-```
-```
 
 Next, run the following command from the **start** directory to recompile your services. 
 ```
@@ -212,15 +202,11 @@ have the following names:
 
 
 
-```
 #Update the **InventoryResource** class#
 **inventory/src/main/java/io/openliberty/guides/inventory/InventoryResource.java**
-```
 Disable tracing of the **@Traced(false)**.
 
 InventoryResource.java
-```
-```
 
 Again, run the **mvn compile** command from the **start** directory to recompile your services:
 ```
@@ -244,7 +230,6 @@ annotation from the Contexts and Dependency Injections API.
 Inject the **Tracer** object into the **inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java** file.
 Then, use it to define a new child scope in the **add()** call.
 
-```
 Replace the `InventoryManager` class.
 
 > [File -> Open]guide-microprofile-opentracing/start/inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java
@@ -315,8 +300,8 @@ public class InventoryManager {
 }
 ```
 {: codeblock}
-```
-```
+
+InventoryManager.java
 
 The **try** block that you see here is called a **try-with-resources** statement, meaning that the **childScope** object is closed at the end of the statement. It's good practice to define custom spans inside
 such statements. Otherwise, any exceptions that are thrown before the span is closed will leak the active span.
@@ -351,12 +336,8 @@ you deem necessary, which might include the **SpanBuilder** interface. You can u
 creation and customization, including setting timestamps.
 
 SystemResource.java
-```
-```
 
 InventoryResource.java
-```
-```
 
 
 ## Testing the services
