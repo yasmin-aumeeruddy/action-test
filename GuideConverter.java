@@ -16,14 +16,14 @@ public class GuideConverter{
  	String guideName = args[0];
         getMD(guideName);
         System.out.println("Guide converted");
-        System.out.println("Find markdown in "+guideName+".md");
+        System.out.println("Find markdown in instructions/"+guideName+"/README.md");
         
     }
 
     // inserts gitclone.aoc from https://github.com/OpenLiberty/guides-common
     public static void clone(String guideName){
         try{
-            String addition = "\n## Getting Started\n\nIf a terminal window does not open navigate:\n\n> Terminal -> New Terminal\n\nCheck you are in the **home/project** folder:\n\n```\npwd\n```\n{: codeblock}\n\nThe fastest way to work through this guide is to clone the Git repository and use the projects that are provided inside:\n\n```\ngit clone https://github.com/"+guideName+".git\ncd "+ guideName + "\n```\n{: codeblock}\n\nThe **start** directory contains the starting project that you will build upon.\n";
+            String addition = "\n## Getting Started\n\nIf a terminal window does not open navigate:\n\n> Terminal -> New Terminal\n\nCheck you are in the **home/project** folder:\n\n```\npwd\n```\n{: codeblock}\n\nThe fastest way to work through this guide is to clone the Git repository and use the projects that are provided inside:\n\n```\ngit clone https://github.com/open-liberty/"+guideName+".git\ncd "+ guideName + "\n```\n{: codeblock}\n\nThe **start** directory contains the starting project that you will build upon.\n";
             writeToFile(addition,guideName);
         }
         catch(IOException ex){
@@ -218,7 +218,7 @@ public class GuideConverter{
         try{
             //read adoc file
             String httpsURL = "https://raw.githubusercontent.com/openliberty/"+guideName+"/master/README.adoc";
-            String FILENAME = "c:\\temp\\filename.adoc";
+            String FILENAME = "temp.adoc";
             BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
             URL myurl = new URL(httpsURL);
             HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
