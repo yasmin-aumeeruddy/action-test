@@ -235,9 +235,9 @@ public class GuideConverter{
             String[] startingPhrases = {"//",":","[source","NOTE:","include::","[role=","[.tab_"};
             //write each line into the file
             while ((inputLine = in.readLine()) != null) {
-
-                if(inputLine.startsWith("include::{")){
-                    System.out.println(inputLine);
+                
+                if(inputLine.equals("----")){
+                    System.out.println("Testing");
                 }
 
                 //finds title and skips over irrelevant lines
