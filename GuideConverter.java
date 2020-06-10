@@ -237,7 +237,21 @@ public class GuideConverter{
             while ((inputLine = in.readLine()) != null) {
                 
                 if(inputLine.equals("----")){
-                    System.out.println("Testing");
+                    position = "code";
+                    continue;
+                }
+                
+                if(position.equals("code")){
+                    if(inputLine.equals("----"){
+                        writeToFile("```",guideName);
+                        continue;
+                    elif(inputLine.startsWith("mvn")){
+                        writeToFile("````\n"+inputLine+"```\n{codeblock}",guideName);
+                        continue;
+                    }
+                    else{
+                        position = "main";
+                    }
                 }
 
                 //finds title and skips over irrelevant lines
