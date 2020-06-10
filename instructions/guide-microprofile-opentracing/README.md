@@ -41,7 +41,7 @@ pwd
 The fastest way to work through this guide is to clone the Git repository and use the projects that are provided inside:
 
 ```
-git clone https://github.com/guide-microprofile-opentracing.git
+git clone https://github.com/open-liberty/guide-microprofile-opentracing.git
 cd guide-microprofile-opentracing
 ```
 {: codeblock}
