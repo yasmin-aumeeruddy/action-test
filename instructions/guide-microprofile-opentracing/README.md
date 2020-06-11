@@ -1,12 +1,12 @@
 
 # Enabling distributed tracing in microservices
-## What you'll learn
+## What you'll learn 
+
+TESTING 
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
-
-OpenTracing is a standard API for instrumenting microservices for distributed tracing. Distributed
-tracing helps troubleshoot microservices by examining and logging requests as they propagate through a
+oot microservices by examining and logging requests as they propagate through a
 distributed system, allowing developers to tackle the otherwise difficult task of debugging these requests.
 Without a distributed tracing system in place, analyzing the workflows of operations becomes difficult,
 particularly in regard to pinpointing when and by whom a request is received, as well as when a response
@@ -66,7 +66,7 @@ to use MicroProfile OpenTracing. Feel free to give them a try before you proceed
 
 To try out the services, navigate to the **finish** directory and run the Maven **install** phase to build the services
 ```
-mvn install
+mvn install babyyyy
 ```
 
 then, run the Maven **liberty:start-server** goal to start them in two Open Liberty servers:
@@ -373,7 +373,7 @@ rmdir guide-microprofile-opentracing
 {: codeblock}
 
 
-## Great work! You're done!
+## Great work! You're done! testing
 
 You have just used MicroProfile OpenTracing in Open Liberty to customize how and which traces are delivered to Zipkin.
 
