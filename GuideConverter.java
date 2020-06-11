@@ -166,7 +166,8 @@ public class GuideConverter{
     //inserts code snippet 
     public static void codeSnippet(String path, String guideName){
         try{
-            String httpsURL = "https://raw.githubusercontent.com/OpenLiberty/"+guideName+"/master/finish/"+path;
+            //CHANGE URL TO OPEN LIBERTY AFTER DEMO
+            String httpsURL = "https://raw.githubusercontent.com/yasmin-aumeeruddy/"+guideName+"/master/finish/"+path;
             String FILENAME = "c:\\temp\\filename.adoc";
             BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
             URL myurl = new URL(httpsURL);
