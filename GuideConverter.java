@@ -177,7 +177,7 @@ public class GuideConverter{
     }
 
     //configures link
-    public static String link(String inputLine, String guideName){
+    public static void link(String inputLine, String guideName){
         String linkParts[] = new String[2];
         String findLink[];
         String link;
