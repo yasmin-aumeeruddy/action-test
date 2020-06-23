@@ -23,7 +23,6 @@ jobs:
         javac GuideConverter.java
         java GuideConverter ${{ github.event.client_payload.repository }}
         rm -f temp.adoc
-        rm -f ${{ github.event.client_payload.repository }}.md
         cat instructions/${{ github.event.client_payload.repository }}/README.md
     - name: git push
       run: |
