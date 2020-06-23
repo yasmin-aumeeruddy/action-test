@@ -419,6 +419,7 @@ public class GuideConverter{
                 //identifies a link in the file line and configures it
                 if(inputLine.contains("^]")){
                     link(inputLine,guideName);    
+                    continue;
                 }
 
                 //identfies if instructions from github.com/OpenLiberty/guides-common need to be inserted 
