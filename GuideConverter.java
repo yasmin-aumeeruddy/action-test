@@ -250,7 +250,7 @@ public class GuideConverter{
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 if(!inputLine.replaceAll(" ","").startsWith("/")){
-                    if(!inputLine.startsWith(" *")){
+                    if(!inputLine.startsWith("*")){
                         if(!inputLine.startsWith("#")){
                             writeToFile(inputLine,guideName);
                         }
