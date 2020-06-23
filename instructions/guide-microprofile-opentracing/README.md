@@ -2,7 +2,7 @@
 # Enabling distributed tracing in microservices
 ## What you'll learn
 
-Testing conversion 23/06/2020 14:05
+Testing conversion 23/06/2020 14:44
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
@@ -202,15 +202,6 @@ Update the `InventoryManager` class.
 
 
 ```
-* Copyright (c) 2017, 2020 IBM Corporation and others.
-* All rights reserved. This program and the accompanying materials
-* are made available under the terms of the Eclipse Public License v1.0
-* which accompanies this distribution, and is available at
-* http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-*     IBM Corporation - Initial implementation
-*******************************************************************************/
 package io.openliberty.guides.inventory;
 
 import java.util.ArrayList;
@@ -295,6 +286,15 @@ Update the `InventoryResource` class
 
 
 ```
+ * Copyright (c) 2017, 2020 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - Initial implementation
+ *******************************************************************************/
 package io.openliberty.guides.inventory;
 
 import java.util.Properties;
@@ -379,15 +379,6 @@ Replace the `InventoryManager` class.
 
 
 ```
-* Copyright (c) 2017, 2020 IBM Corporation and others.
-* All rights reserved. This program and the accompanying materials
-* are made available under the terms of the Eclipse Public License v1.0
-* which accompanies this distribution, and is available at
-* http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-*     IBM Corporation - Initial implementation
-*******************************************************************************/
 package io.openliberty.guides.inventory;
 
 import java.util.ArrayList;
