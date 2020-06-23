@@ -193,7 +193,7 @@ public class GuideConverter{
         link = findLink[findLink.length-1];
         if(link.contains("localhost")){
             inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]","\n```\ncurl "+link+"\n```\n{: codeblock}\n");
-            return inputLine
+            return inputLine;
         }
         formattedLink = "[" + description + "](" + link + ")";
         inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]",formattedLink);
