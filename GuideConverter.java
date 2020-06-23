@@ -193,7 +193,7 @@ public class GuideConverter{
             findLink = linkParts[0].split(" ");
             link = findLink[findLink.length-1];
             if(link.contains("localhost")){
-                inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]","\n```\ncurl `"+link+"`\n```\n{: codeblock}\n\n");
+                inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]","\n```\ncurl "+link+"\n```\n{: codeblock}\n\n");
                 writeToFile(inputLine, guideName);
                 return;
             }
@@ -258,8 +258,10 @@ public class GuideConverter{
             while ((inputLine = in.readLine()) != null) {
                 if(!inputLine.replaceAll(" ","").startsWith("/")){
                     if(!inputLine.startsWith("*")){
-                        if(!inputLine.startsWith("#")){
-                            writeToFile(inputLine,guideName);
+                        if(!inputLine.startsWith(" *")){
+                            if(!inputLine.startsWith("#")){
+                                writeToFile(inputLine,guideName);
+                            }
                         }
                     }
                 }
