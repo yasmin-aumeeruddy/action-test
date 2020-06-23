@@ -2,7 +2,6 @@
 # Adding health reports to microservices
 ## What you'll learn
 
-
 You will learn how to use MicroProfile Health to report the health status of microservices and take
 appropriate actions based on this report.
 
@@ -63,7 +62,7 @@ The **system** and **inventory** services can be found at the following URLs:
 
 - 
 ```
-curl `http://localhost:9080/system/properties`
+curl http://localhost:9080/system/properties
 ```
 {: codeblock}
 
@@ -72,7 +71,7 @@ curl `http://localhost:9080/system/properties`
 
 - 
 ```
-curl `http://localhost:9080/inventory/systems`
+curl http://localhost:9080/inventory/systems
 ```
 {: codeblock}
 
@@ -81,7 +80,7 @@ curl `http://localhost:9080/inventory/systems`
 
 Visit the 
 ```
-curl `http://localhost:9080/health`
+curl http://localhost:9080/health
 ```
 {: codeblock}
 
@@ -94,7 +93,7 @@ checks show the state of the **inventory** service. As you might expect, both se
 
 You can also access the `/health/ready` endpoint by visiting the 
 ```
-curl `http://localhost:9080/health/ready`
+curl http://localhost:9080/health/ready
 ```
 {: codeblock}
 
@@ -103,7 +102,7 @@ You can also access the **/health/ready** endpoint by visiting the http://localh
 URL to view the data from the readiness health checks. Similarly, access the **/health/live**
 endpoint by visiting the 
 ```
-curl `http://localhost:9080/health/live`
+curl http://localhost:9080/health/live
 ```
 {: codeblock}
 
@@ -179,15 +178,6 @@ touch src/main/java/io/openliberty/guides/system/SystemReadinessCheck.java
 > [File -> Open]guide-microprofile-health/start/src/main/java/io/openliberty/guides/system/SystemReadinessCheck.java
 ```
 
- * Copyright (c) 2018, 2020 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - Initial implementation
- *******************************************************************************/
 package io.openliberty.guides.system;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -221,7 +211,7 @@ The **@Readiness** annotation indicates that this particular bean is a readiness
 By pairing this annotation with the **ApplicationScoped** context from the Contexts and
 Dependency Injections API, the bean is discovered automatically when the 
 ```
-curl `http://localhost:9080/health`
+curl http://localhost:9080/health
 ```
 {: codeblock}
 
@@ -247,15 +237,6 @@ touch src/main/java/io/openliberty/guides/system/SystemLivenessCheck.java
 > [File -> Open]guide-microprofile-health/start/src/main/java/io/openliberty/guides/system/SystemLivenessCheck.java
 ```
 
- * Copyright (c) 2018, 2020 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - Initial implementation
- *******************************************************************************/
 package io.openliberty.guides.system;
 
 import java.lang.management.ManagementFactory;
@@ -306,15 +287,6 @@ touch src/main/java/io/openliberty/guides/inventory/InventoryReadinessCheck.java
 > [File -> Open]guide-microprofile-health/start/src/main/java/io/openliberty/guides/inventory/InventoryReadinessCheck.java
 ```
 
- * Copyright (c) 2018, 2020 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - Initial implementation
- *******************************************************************************/
 package io.openliberty.guides.inventory;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -400,15 +372,6 @@ touch src/main/java/io/openliberty/guides/inventory/InventoryLivenessCheck.java
 > [File -> Open]guide-microprofile-health/start/src/main/java/io/openliberty/guides/inventory/InventoryLivenessCheck.java
 ```
 
- * Copyright (c) 2018, 2020 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - Initial implementation
- *******************************************************************************/
 package io.openliberty.guides.inventory;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -453,7 +416,7 @@ than 90% of the maximum memory is being used, a **DOWN** status is returned.
 
 While the server is running, navigate to the 
 ```
-curl `http://localhost:9080/health`
+curl http://localhost:9080/health
 ```
 {: codeblock}
 
@@ -463,7 +426,7 @@ the aggregated liveness and readiness health reports on the two services.
 
 You can also navigate to the 
 ```
-curl `http://localhost:9080/health/ready`
+curl http://localhost:9080/health/ready
 ```
 {: codeblock}
 
@@ -471,7 +434,7 @@ curl `http://localhost:9080/health/ready`
 You can also navigate to the http://localhost:9080/health/ready[http://localhost:9080/health/ready^]
 URL to view the readiness health report, or the 
 ```
-curl `http://localhost:9080/health/live`
+curl http://localhost:9080/health/live
 ```
 {: codeblock}
 
@@ -483,7 +446,7 @@ Put the **inventory** service in maintenance by setting the **io_openliberty_gui
 property to **true** in the **resources/CustomConfigSource.json** file. Because
 this configuration file is picked up dynamically, simply refresh the 
 ```
-curl `http://localhost:9080/health`
+curl http://localhost:9080/health
 ```
 {: codeblock}
 
@@ -493,7 +456,7 @@ URL to see that the state of the **inventory** service changed to **DOWN**. The
 overall state of the application also changed to **DOWN** as a result. Go to the
 
 ```
-curl `http://localhost:9080/inventory/systems`
+curl http://localhost:9080/inventory/systems
 ```
 {: codeblock}
 
@@ -519,15 +482,6 @@ touch src/test/java/it/io/openliberty/guides/health/HealthIT.java
 > [File -> Open]guide-microprofile-health/start/src/test/java/it/io/openliberty/guides/health/HealthIT.java
 ```
 
- * Copyright (c) 2018, 2019 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - Initial implementation
- *******************************************************************************/
 package it.io.openliberty.guides.health;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
