@@ -2,6 +2,7 @@
 # Adding health reports to microservices
 ## What you'll learn
 
+
 You will learn how to use MicroProfile Health to report the health status of microservices and take
 appropriate actions based on this report.
 
