@@ -2,7 +2,7 @@
 # Enabling distributed tracing in microservices
 ## What you'll learn
 
-Testing conversion 23/06/2020 15:6
+Testing conversion 23/06/2020 15:03
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
@@ -82,9 +82,10 @@ mvn liberty:start-server
 
 Make sure that your Zipkin server is running and point your browser to the 
 ******
-curl inv-url/localhost
+curl **inv-url/localhost**
 ******
 {: codeblock}
+
  URL. 
 When you visit this endpoint, you make two GET HTTP requests, one to the **system** service and one to the **inventory**
 service. Both of these requests are configured to be traced, so a new trace will be recorded in Zipkin.
@@ -454,9 +455,10 @@ mvn compile
 Point to the
 
 ******
-curl inv-url/localhost
+curl **inv-url/localhost**
 ******
 {: codeblock}
+
  URL, check your Zipkin server, and sort the traces by newest first. You see two new
 trace records, one for the **system** service and one for the **inventory** service. The **system** trace 
 contains one span for the **getProperties()** method in the **SystemResource** class. The **inventory** 
