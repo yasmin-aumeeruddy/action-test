@@ -1,7 +1,8 @@
 
 # Enabling distributed tracing in microservices
 ## What you'll learn
-Testing conversion 
+
+Testing conversion 23/06/2020 10:49
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
@@ -24,7 +25,7 @@ server, then any logging software would do the trick.
 
 
 
-## Getting Started
+# Getting Started
 
 If a terminal window does not open navigate:
 
@@ -40,7 +41,7 @@ pwd
 The fastest way to work through this guide is to clone the Git repository and use the projects that are provided inside:
 
 ```
-git clone https://github.com/open-liberty/guide-microprofile-opentracing.git
+git clone https://github.com/openliberty/guide-microprofile-opentracing.git
 cd guide-microprofile-opentracing
 ```
 {: codeblock}
@@ -65,13 +66,19 @@ to use MicroProfile OpenTracing. Feel free to give them a try before you proceed
 
 To try out the services, navigate to the **finish** directory and run the Maven **install** phase to build the services
 ```
-mvn install babyyyy
+mvn install 
 ```
+{codeblock}
+
+
 
 then, run the Maven **liberty:start-server** goal to start them in two Open Liberty servers:
 ```
 mvn liberty:start-server
 ```
+{codeblock}
+
+
 
 Make sure that your Zipkin server is running and point your browser to the [inv-url/localhost](inv-url/localhost) URL. 
 When you visit this endpoint, you make two GET HTTP requests, one to the **system** service and one to the **inventory**
@@ -97,11 +104,14 @@ When you are done checking out the services, stop both Open Liberty servers usin
 ```
 mvn liberty:stop-server
 ```
+{codeblock}
 
 
 
 
-## Running the services
+
+
+# Running the services
 
 You'll need to start the services to see basic traces appear in Zipkin. So, before you proceed, build
 and start the provided **system** and **inventory** services in the starting project. Navigate to the **start**
@@ -109,11 +119,17 @@ directory and run the Maven **install** goal
 ```
 mvn install
 ```
+{codeblock}
+
+
 
 then, run the **liberty:start-server** goal:
 ```
 mvn liberty:start-server
 ```
+{codeblock}
+
+
 
 When the servers start, you can find the **system** and **inventory** services at the following URLs:
 
@@ -121,13 +137,13 @@ When the servers start, you can find the **system** and **inventory** services a
 - [inv-url](inv-url)
 
 
-## Existing Tracer implementation
+# Existing Tracer implementation
 
 To collect traces across your systems, you need to implement the OpenTracing **Tracer**
 interface. For this guide, you can access a bare-bones **Tracer** implementation for
 the Zipkin server in the form of a user feature for Open Liberty.
 
-This feature is already configured for you in your **server.xml** files. It will be
+This feature is already configured for you in your **pom.xml** and **server.xml** files. It will be
 downloaded and installed automatically into each service when you run a Maven build. You can find the **opentracingZipkin** feature
 enabled in your **server.xml** file.
 
@@ -142,7 +158,7 @@ server.xml
 pom.xml
 
 
-## Enabling distributed tracing
+# Enabling distributed tracing
 
 The MicroProfile OpenTracing feature enables tracing of all JAX-RS methods by default.
 To further control and customize these traces, use the **@Traced** annotation to enable and disable
@@ -151,7 +167,7 @@ tracing of particular methods. You can also inject a custom **Tracer** object to
 
 ### Enabling distributed tracing without code instrumentation
 
-Because tracing of all JAX-RS methods is enabled by default, you need only to enable **Zipkin** user feature in the **server.xml** file to see some basic traces in Zipkin.
+Because tracing of all JAX-RS methods is enabled by default, you need only to enable **MicroProfile OpenTracing** feature and the **Zipkin** user feature in the **server.xml** file to see some basic traces in Zipkin.
 
 Both of these features are already enabled in the **inventory** and **system** configuration files.
 
@@ -179,65 +195,13 @@ form: **<package name>.<class name>.<method name>**. If you use this parameter a
 all methods within that class will have the same span name unless they are explicitly overridden by
 another **@Traced** annotation.
 
-#Update the **InventoryManager** class.#
-**inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java**
-Enable tracing of the **@Traced** as shown.
-
-InventoryManager.java
-
-Next, run the following command from the **start** directory to recompile your services. 
-```
-mvn compile
-```
-Point to the
-[inv-url](inv-url) URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
-that is two spans long with one span for the **InventoryResource**
-class and another span for the **InventoryManager** class. Verify that these spans
-have the following names:
-
-- **get:io.openliberty.guides.inventory.inventoryresource.listcontents**
-- **inventorymanager.list**
-
-
-
-
-#Update the **InventoryResource** class#
-**inventory/src/main/java/io/openliberty/guides/inventory/InventoryResource.java**
-Disable tracing of the **@Traced(false)**.
-
-InventoryResource.java
-
-Again, run the **mvn compile** command from the **start** directory to recompile your services:
-```
-mvn compile
-```
-Point to the
-[inv-url](inv-url) URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
-that is just one span long for the remaining **list()** method in the **InventoryManager** class. Verify
-that this span has the following name:
-
-- **inventorymanager.list**
-
-
-
-### Injecting a custom Tracer object
-
-The MicroProfile OpenTracing specification also makes the underlying OpenTracing **Tracer** instance
-available for use. You can access the configured **Tracer** by injecting it into a bean by using the **@Inject**
-annotation from the Contexts and Dependency Injections API.
-
-Inject the **Tracer** object into the **inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java** file.
-Then, use it to define a new child scope in the **add()** call.
-
-Replace the `InventoryManager` class.
+Update the `InventoryManager` class.
 
 > [File -> Open]guide-microprofile-opentracing/start/inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java
 
 
 
 ```
-```
-
 * Copyright (c) 2017, 2020 IBM Corporation and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
@@ -300,6 +264,185 @@ public class InventoryManager {
 ```
 {: codeblock}
 
+
+Enable tracing of the **list()** non-JAX-RS method by updating **@Traced** as shown.
+
+InventoryManager.java
+
+Next, run the following command from the **start** directory to recompile your services. 
+```
+mvn compile
+```
+{codeblock}
+
+
+Point to the
+[inv-url](inv-url) URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
+that is two spans long with one span for the **listContents()** JAX-RS method in the **InventoryResource**
+class and another span for the **list()** method in the **InventoryManager** class. Verify that these spans
+have the following names:
+
+- **get:io.openliberty.guides.inventory.inventoryresource.listcontents**
+- **inventorymanager.list**
+
+
+
+
+Update the `InventoryResource` class
+
+> [File -> Open]guide-microprofile-opentracing/start/inventory/src/main/java/io/openliberty/guides/inventory/InventoryResource.java
+
+
+
+```
+package io.openliberty.guides.inventory;
+
+import java.util.Properties;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.eclipse.microprofile.opentracing.Traced;
+
+import io.openliberty.guides.inventory.model.InventoryList;
+
+@RequestScoped
+@Path("/systems")
+public class InventoryResource {
+
+    @Inject InventoryManager manager;
+
+    @GET
+    @Path("/{hostname}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPropertiesForHost(@PathParam("hostname") String hostname) {
+        Properties props = manager.get(hostname);
+        if (props == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                           .entity("{ \"error\" : \"Unknown hostname or the system service " 
+                           + "may not be running on " + hostname + "\" }")
+                           .build();
+        }
+        manager.add(hostname, props);
+        return Response.ok(props).build();
+    }
+    
+    @GET
+    @Traced(false)
+    @Produces(MediaType.APPLICATION_JSON)
+    public InventoryList listContents() {
+        return manager.list();
+    }
+}
+```
+{: codeblock}
+
+
+Disable tracing of the **listContents()** JAX-RS method by setting **@Traced(false)**.
+
+InventoryResource.java
+
+Again, run the **mvn compile** command from the **start** directory to recompile your services:
+```
+mvn compile
+```
+{codeblock}
+
+
+Point to the
+[inv-url](inv-url) URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
+that is just one span long for the remaining **list()** method in the **InventoryManager** class. Verify
+that this span has the following name:
+
+- **inventorymanager.list**
+
+
+
+### Injecting a custom Tracer object
+
+The MicroProfile OpenTracing specification also makes the underlying OpenTracing **Tracer** instance
+available for use. You can access the configured **Tracer** by injecting it into a bean by using the **@Inject**
+annotation from the Contexts and Dependency Injections API.
+
+Inject the **Tracer** object into the **inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java** file.
+Then, use it to define a new child scope in the **add()** call.
+
+Replace the `InventoryManager` class.
+
+> [File -> Open]guide-microprofile-opentracing/start/inventory/src/main/java/io/openliberty/guides/inventory/InventoryManager.java
+
+
+
+```
+* Copyright (c) 2017, 2020 IBM Corporation and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+*     IBM Corporation - Initial implementation
+*******************************************************************************/
+package io.openliberty.guides.inventory;
+
+import java.util.ArrayList;
+import java.util.Properties;
+import io.openliberty.guides.inventory.client.SystemClient;
+import io.openliberty.guides.inventory.model.InventoryList;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.util.List;
+import java.util.Collections;
+
+import org.eclipse.microprofile.opentracing.Traced;
+
+import io.opentracing.Scope;
+import io.opentracing.Tracer;
+import io.openliberty.guides.inventory.model.*;
+
+@ApplicationScoped
+public class InventoryManager {
+    
+    private List<SystemData> systems = Collections.synchronizedList(new ArrayList<>());
+    private SystemClient systemClient = new SystemClient();
+    @Inject Tracer tracer;
+
+    public Properties get(String hostname) {
+        systemClient.init(hostname, 9080);
+        Properties properties = systemClient.getProperties();
+        
+        return properties;
+    }
+
+    public void add(String hostname, Properties systemProps) {
+        Properties props = new Properties();
+        props.setProperty("os.name", systemProps.getProperty("os.name"));
+        props.setProperty("user.name", systemProps.getProperty("user.name"));
+
+        SystemData system = new SystemData(hostname, props);
+        if (!systems.contains(system)) {
+            try (Scope childScope = tracer.buildSpan("add() Span")
+                                              .startActive(true)) {
+                systems.add(system);
+            }
+        }
+    }
+
+    @Traced(value = true, operationName = "InventoryManager.list")
+    public InventoryList list() {
+        return new InventoryList(systems);
+    }
+}
+```
+{: codeblock}
+
+
+
 InventoryManager.java
 
 The **try** block that you see here is called a **try-with-resources** statement, meaning that the **childScope** object is closed at the end of the statement. It's good practice to define custom spans inside
@@ -309,6 +452,9 @@ Next, run the following command from the **start** directory to recompile your s
 ```
 mvn compile
 ```
+{codeblock}
+
+
 Point to the
 [inv-url/localhost](inv-url/localhost) URL, check your Zipkin server, and sort the traces by newest first. You see two new
 trace records, one for the **system** service and one for the **inventory** service. The **system** trace 
@@ -339,7 +485,7 @@ SystemResource.java
 InventoryResource.java
 
 
-## Testing the services
+# Testing the services
 
 No automated tests are provided to verify the correctness of the traces. Manually verify these traces
 by viewing them on the Zipkin server.
@@ -356,6 +502,9 @@ When you are done checking out the services, stop the server by using the Maven
 ```
 mvn liberty:stop-server
 ```
+{codeblock}
+
+
 
 
 # Summary
@@ -372,7 +521,7 @@ rmdir guide-microprofile-opentracing
 {: codeblock}
 
 
-## Great work! You're done! testing
+# Great work! You're done! testing
 
 You have just used MicroProfile OpenTracing in Open Liberty to customize how and which traces are delivered to Zipkin.
 
