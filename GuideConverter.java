@@ -23,7 +23,7 @@ public class GuideConverter{
     // inserts gitclone.aoc from https://github.com/OpenLiberty/guides-common
     public static void clone(String guideName){
         try{
-            String addition = "\n## Getting Started\n\nIf a terminal window does not open navigate:\n\n> Terminal -> New Terminal\n\nCheck you are in the **home/project** folder:\n\n```\npwd\n```\n{: codeblock}\n\nThe fastest way to work through this guide is to clone the Git repository and use the projects that are provided inside:\n\n```\ngit clone https://github.com/open-liberty/"+guideName+".git\ncd "+ guideName + "\n```\n{: codeblock}\n\nThe **start** directory contains the starting project that you will build upon.\n";
+            String addition = "\n# Getting Started\n\nIf a terminal window does not open navigate:\n\n> Terminal -> New Terminal\n\nCheck you are in the **home/project** folder:\n\n```\npwd\n```\n{: codeblock}\n\nThe fastest way to work through this guide is to clone the Git repository and use the projects that are provided inside:\n\n```\ngit clone https://github.com/openliberty/"+guideName+".git\ncd "+ guideName + "\n```\n{: codeblock}\n\nThe **start** directory contains the starting project that you will build upon.\n";
             writeToFile(addition,guideName);
         }
         catch(IOException ex){
@@ -62,6 +62,26 @@ public class GuideConverter{
         }
     }
 
+    //inserts trywhatyoubuild-intro.adoc from  https://github.com/OpenLiberty/guides-common
+    public static void tryBuildIntro(String guideName){
+        try{
+            String dev ="## Try what you’ll build\nThe **finish** directory in the root of this guide contains the finished application. Give it a try before you proceed.\n\nTo try out the application, first navigate to the finish directory and then run the following Maven goal to build the application and run it inside Open Liberty:\n```\ncd finish\nmvn install liberty:start-server\n```\n{: codeblock}\n\n";
+            writeToFile(dev, guideName);
+        }catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    //inserts trywhatyoubuild-intro.adoc from  https://github.com/OpenLiberty/guides-common
+    public static void tryBuildEnd(String guideName){
+        try{
+            String dev ="After you are done checking out the application, stop the Open Liberty server:\n\n```\nmvn liberty:stop-server\n```\n{: codeblock}";
+            writeToFile(dev, guideName);
+        }catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
     //inserts devmode-quit from  https://github.com/OpenLiberty/guides-common
     public static void devEnd(String guideName){
         try{
@@ -72,6 +92,34 @@ public class GuideConverter{
         }
     }
 
+    //creates command for navigation
+    public static void start(String guideName){
+        try{
+            String startNav = "Navigate to the **start** directory to begin.\n\n```\ncd start\n```\n{: codeblock}\n\n";
+            writeToFile(startNav, guideName);
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    public static void removeLast(String guideName){
+        try{
+            java.io.RandomAccessFile file = new java.io.RandomAccessFile(guideName+".md", "rw");
+            byte b = 0;
+            long pos = file.length();
+            while (b != '\n' && --pos >= 0) {
+                file.seek(pos);
+                b = file.readByte();
+            }
+            file.seek(++pos);
+            file.setLength(pos);
+            file.write("".getBytes());
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
     //configures instructions to replace file
     public static String replace(String inputLine, String guideName){
         try{
@@ -81,7 +129,25 @@ public class GuideConverter{
             writeToFile("\n",guideName);
             writeToFile("```",guideName);
             codeSnippet(inputLine.replaceAll("\\*\\*",""), guideName);
-            String position = "file";
+            String position = "main";
+            return position;
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+            return "";
+        }
+    }
+
+    //configures instructions to udate file
+    public static String update(String inputLine, String guideName){
+        try{
+            inputLine = inputLine.replaceAll("#","");
+            inputLine = inputLine.replaceAll("`","**");
+            writeToFile("\n> [File -> Open]"+guideName + "/start/" + inputLine.replaceAll("\\*\\*","") +"\n", guideName);
+            writeToFile("\n",guideName);
+            writeToFile("```",guideName);
+            codeSnippet(inputLine.replaceAll("\\*\\*",""), guideName);
+            String position = "main";
             return position;
         }
         catch(IOException ex){
@@ -99,9 +165,9 @@ public class GuideConverter{
             writeToFile(inputLine,guideName);
             writeToFile("```",guideName);
             writeToFile("{: codeblock}\n\n",guideName);
-            writeToFile("> [File -> Open]"+ guideName + "/start/" + inputLine.replaceAll("touch ","") + "\n", guideName);
+            writeToFile("> [File -> Open]"+ guideName + "/start/" + inputLine.replaceAll("touch ","") + "\n```\n", guideName);
             codeSnippet(inputLine.replaceAll("touch ",""), guideName);
-            String position = "file";
+            String position = "main";
             return position;
             
         }catch(IOException ex){
@@ -147,11 +213,17 @@ public class GuideConverter{
                         inputLine = inputLine.replaceAll("”€â”€","__");
                         inputLine = inputLine.replaceAll("â”œâ","  |");
                         inputLine = inputLine.replaceAll("â”‚","");
-                        inputLine = inputLine.replaceAll("\\[hotspot.*\\]","");
+                        inputLine = inputLine.replaceAll("\\[hotspot(.*?)\\]","");
+
                         if(inputLine.equals("******")){
                             inputLine="```";
                         }
-                        if(inputLine.startsWith("=")){
+                        if(inputLine.startsWith("== ")){
+                            if(!inputLine.equals("== What you'll learn")){
+                                inputLine = inputLine.replaceAll("==","#");
+                            }
+                        }
+                        if(inputLine.startsWith("==")){
                             inputLine = inputLine.replaceAll("=","#");
                         }
                         writeToFile(inputLine,guideName);
@@ -166,9 +238,8 @@ public class GuideConverter{
     //inserts code snippet 
     public static void codeSnippet(String path, String guideName){
         try{
-            //CHANGE URL TO OPEN LIBERTY AFTER DEMO
             String httpsURL = "https://raw.githubusercontent.com/yasmin-aumeeruddy/"+guideName+"/master/finish/"+path;
-            String FILENAME = "c:\\temp\\filename.adoc";
+            String FILENAME = "temp.adoc";
             BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
             URL myurl = new URL(httpsURL);
             HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
@@ -177,7 +248,6 @@ public class GuideConverter{
             InputStreamReader isr = new InputStreamReader(ins, "Windows-1252");
             BufferedReader in = new BufferedReader(isr);
             String inputLine;
-            writeToFile("```\n", guideName);
             while ((inputLine = in.readLine()) != null) {
                 if(!inputLine.replaceAll(" ","").startsWith("/")){
                     if(!inputLine.startsWith(" *")){
@@ -187,28 +257,41 @@ public class GuideConverter{
                     }
                 }
             }
-            writeToFile("```\n{: codeblock}",guideName);
+            writeToFile("```\n{: codeblock}\n\n",guideName);
         }catch(IOException ex){
             System.out.println(ex);
         }
     }
 
     //configures table UNFINISHED
-    public static String table(String inputLine, String row, String guideName){
+    public static String table(String inputLine, String guideName){
         try{
             if(inputLine.equals("|===")){
-                return "table";
+                return "main";
             }
             if(inputLine.startsWith("     ")){
                 inputLine = inputLine.replaceAll("                            ","");
                 writeToFile(inputLine,guideName);
-                return "table";
+                return "main";
             }
             if(inputLine.startsWith("| *")){
-                writeToFile(inputLine+"\n---|---",guideName);
+                int count = 0;
+                for(int i =0; i<inputLine.length();i++){
+                    if(inputLine.charAt(i) == '*')
+                    {
+                        count += 1;
+                    }
+                }
+                writeToFile(inputLine, guideName);
+                String split = "";
+                for(int j = 0; j < count/2;j++){
+                    split = split + "|---";
+                }
+                writeToFile(split,guideName);
                 return "table";
             }
-            return "main";
+            writeToFile(inputLine,guideName);
+            return "table";
         }
         catch(IOException ex){
             return "";
@@ -218,7 +301,6 @@ public class GuideConverter{
     public static void getMD(String guideName){
         try{
             //read adoc file
-            //CHANGE URL TO OPEN LIBERTY AFTER DEMO
             String httpsURL = "https://raw.githubusercontent.com/yasmin-aumeeruddy/"+guideName+"/master/README.adoc";
             String FILENAME = "temp.adoc";
             BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME));
@@ -232,28 +314,41 @@ public class GuideConverter{
             String position = "";
             String inputLine;
             int positionNumber = 0;
-            String tableRow = "";
             //stores the start of irrelevant lines
             String[] startingPhrases = {"//",":","[source","NOTE:","include::","[role=","[.tab_"};
             //write each line into the file
             while ((inputLine = in.readLine()) != null) {
-                
-                if(inputLine.equals("----")){
+
+                if(position.equals("table")){
+                    position = table(inputLine, guideName);
+                    continue;
+                }
+
+                if(inputLine.equals("```")){
                     position = "code";
                     continue;
                 }
                 
+                if(inputLine.equals("|===")){
+                    position = "table";
+                    continue;
+                }
+                if(inputLine.equals("----")){
+                    continue;
+                }
+
                 if(position.equals("code")){
                     if(inputLine.equals("----")){
                         writeToFile("```",guideName);
                         continue;
                     }
                     else if(inputLine.startsWith("mvn")){
-                        writeToFile("````\n"+inputLine+"```\n{codeblock}",guideName);
+                        writeToFile("```\n"+inputLine+"\n```\n{codeblock}\n\n",guideName);
                         continue;
                     }
-                    position = "main";
-                    
+                    else{
+                        position = "main";
+                    }
                 }
 
                 //finds title and skips over irrelevant lines
@@ -267,6 +362,10 @@ public class GuideConverter{
                     position = "main";
                 }
 
+                if(inputLine.startsWith("[source")){
+                    removeLast(guideName);
+                    continue;
+                }
 
                 //user is instructed to replace a file
                 if(inputLine.startsWith("#Replace")){
@@ -279,6 +378,13 @@ public class GuideConverter{
                 if(inputLine.startsWith("#Create")){
                     writeToFile(inputLine.replaceAll("#",""),guideName);
                     position = "new"; //next lines need configuring so position is changed
+                    continue;
+                }
+
+                //user is instructed to update a file
+                if(inputLine.startsWith("#Update")){
+                    writeToFile(inputLine.replaceAll("#",""),guideName);
+                    position = "update"; //next lines need configuring so position is changed
                     continue;
                 }
 
@@ -295,21 +401,9 @@ public class GuideConverter{
                     continue;
                 }
 
-                // skip over the 6 irrelevant lines after code snippets are inserted
-                if(position.equals("file")){
-                    if(positionNumber < 3)
-                    {
-                        positionNumber += 1;
-                        continue; 
-                    }
-                    if(positionNumber == 3){
-                        position = "main";
-                    }
-                }
-
-                //configure the table
-                if(position.equals("table")){
-                    position = table(inputLine, tableRow, guideName);
+                if(position.equals("update")){
+                    positionNumber = 0;
+                    position = update(inputLine, guideName);
                     continue;
                 }
 
@@ -338,12 +432,24 @@ public class GuideConverter{
                 if(inputLine.equals("include::{common-includes}/devmode-quit.adoc[]")){
                     devEnd(guideName);
                 }
+
+                if(inputLine.equals("include::{common-includes}/twyb-intro.adoc[]")){
+                    tryBuildIntro(guideName);
+                }
+
+                if(inputLine.equals("include::{common-includes}/twyb-end.adoc[]")){
+                    tryBuildEnd(guideName);
+                }
                 
                 if(inputLine.startsWith("[cols")){
                     position = "table";
                     continue;
                 }
                 
+                if(inputLine.equals("Navigate to the `start` directory to begin.")){
+                    start(guideName);
+                    continue;
+                }
 
                 //compares line with the irrelevant ones in startingPhrases
                 for(int i = 0; i < startingPhrases.length; i++){
@@ -380,7 +486,7 @@ public class GuideConverter{
     // append to md file
     public static void writeToFile(String str, String guideName) 
     throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("instructions/"+guideName+"/README.md",true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(guideName+".md",true));
         writer.append("\n"+str);
         writer.close();
     }
