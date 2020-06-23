@@ -2,7 +2,7 @@
 # Enabling distributed tracing in microservices
 ## What you'll learn
 
-Testing conversion 23/06/2020 13:53
+Testing conversion 23/06/2020 14:05
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
@@ -153,9 +153,9 @@ If you want to install this feature yourself, see
 [Enabling distributed tracing](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_dist_tracing.html)
 in the IBM Knowledge Centre.
 
-server.xml
 
-pom.xml
+
+
 
 
 # Enabling distributed tracing
@@ -171,7 +171,7 @@ Because tracing of all JAX-RS methods is enabled by default, you need only to en
 
 Both of these features are already enabled in the **inventory** and **system** configuration files.
 
-server.xml
+
 
 
 Make sure that your services are running. Then, simply point your browser to any of their endpoints and
@@ -267,7 +267,7 @@ public class InventoryManager {
 
 Enable tracing of the **list()** non-JAX-RS method by updating **@Traced** as shown.
 
-InventoryManager.java
+
 
 Next, run the following command from the **start** directory to recompile your services. 
 ```
@@ -345,7 +345,7 @@ public class InventoryResource {
 
 Disable tracing of the **listContents()** JAX-RS method by setting **@Traced(false)**.
 
-InventoryResource.java
+
 
 Again, run the **mvn compile** command from the **start** directory to recompile your services:
 ```
@@ -443,7 +443,7 @@ public class InventoryManager {
 
 
 
-InventoryManager.java
+
 
 The **try** block that you see here is called a **try-with-resources** statement, meaning that the **childScope** object is closed at the end of the statement. It's good practice to define custom spans inside
 such statements. Otherwise, any exceptions that are thrown before the span is closed will leak the active span.
@@ -480,9 +480,9 @@ user feature that is provided. In a real-world scenario, implement all the OpenT
 you deem necessary, which might include the **SpanBuilder** interface. You can use this interface for span
 creation and customization, including setting timestamps.
 
-SystemResource.java
 
-InventoryResource.java
+
+
 
 
 # Testing the services
