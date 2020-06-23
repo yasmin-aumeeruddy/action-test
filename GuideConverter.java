@@ -193,11 +193,12 @@ public class GuideConverter{
         link = findLink[findLink.length-1];
         if(link.contains("localhost")){
             inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]","\n```\ncurl `"+link+"`\n```\n{: codeblock}\n\n");
-            return inputLine;
+            writeToFile(inputLine, guideName);
+            return;
         }
         formattedLink = "[" + description + "](" + link + ")";
         inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]",formattedLink);
-        return inputLine;
+         writeToFile(inputLine, guideName);
     }
 
     // general text configuration
@@ -410,7 +411,7 @@ public class GuideConverter{
 
                 //identifies a link in the file line and configures it
                 if(inputLine.contains("^]")){
-                    inputLine = link(inputLine);    
+                    link(inputLine);    
                 }
 
                 //identfies if instructions from github.com/OpenLiberty/guides-common need to be inserted 
