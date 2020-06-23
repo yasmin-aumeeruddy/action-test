@@ -105,7 +105,7 @@ public class GuideConverter{
 
     public static void removeLast(String guideName){
         try{
-            java.io.RandomAccessFile file = new java.io.RandomAccessFile(guideName+".md", "rw");
+            java.io.RandomAccessFile file = new java.io.RandomAccessFile(guideName+"2.md", "rw");
             byte b = 0;
             long pos = file.length();
             while (b != '\n' && --pos >= 0) {
