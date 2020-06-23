@@ -178,27 +178,32 @@ public class GuideConverter{
 
     //configures link
     public static void link(String inputLine, String guideName){
-        String linkParts[] = new String[2];
-        String findLink[];
-        String link;
-        String description;
-        String formattedLink;
-        String findDescription[];
-        inputLine = inputLine.replaceAll("\\{","");
-        inputLine = inputLine.replaceAll("\\}","");
-        linkParts = inputLine.split("\\[");
-        findDescription = linkParts[1].split("\\^");
-        description = findDescription[0];
-        findLink = linkParts[0].split(" ");
-        link = findLink[findLink.length-1];
-        if(link.contains("localhost")){
-            inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]","\n```\ncurl `"+link+"`\n```\n{: codeblock}\n\n");
-            writeToFile(inputLine, guideName);
-            return;
+        tr{
+            String linkParts[] = new String[2];
+            String findLink[];
+            String link;
+            String description;
+            String formattedLink;
+            String findDescription[];
+            inputLine = inputLine.replaceAll("\\{","");
+            inputLine = inputLine.replaceAll("\\}","");
+            linkParts = inputLine.split("\\[");
+            findDescription = linkParts[1].split("\\^");
+            description = findDescription[0];
+            findLink = linkParts[0].split(" ");
+            link = findLink[findLink.length-1];
+            if(link.contains("localhost")){
+                inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]","\n```\ncurl `"+link+"`\n```\n{: codeblock}\n\n");
+                writeToFile(inputLine, guideName);
+                return;
+            }
+            formattedLink = "[" + description + "](" + link + ")";
+            inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]",formattedLink);
+             writeToFile(inputLine, guideName);
+         }
+        catch(IOException ex){
+            System.out.println(ex);
         }
-        formattedLink = "[" + description + "](" + link + ")";
-        inputLine = inputLine.replaceAll(link+"\\["+description+"\\^\\]",formattedLink);
-         writeToFile(inputLine, guideName);
     }
 
     // general text configuration
