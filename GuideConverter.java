@@ -177,7 +177,7 @@ public class GuideConverter{
     }
 
     //configures link
-    public static String link(String inputLine){
+    public static String link(String inputLine, String guideName){
         String linkParts[] = new String[2];
         String findLink[];
         String link;
@@ -411,7 +411,7 @@ public class GuideConverter{
 
                 //identifies a link in the file line and configures it
                 if(inputLine.contains("^]")){
-                    link(inputLine);    
+                    link(inputLine,guideName);    
                 }
 
                 //identfies if instructions from github.com/OpenLiberty/guides-common need to be inserted 
