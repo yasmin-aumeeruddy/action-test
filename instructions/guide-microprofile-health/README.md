@@ -2,6 +2,7 @@
 # Adding health reports to microservices
 ## What you'll learn
 
+Testing conversion 30/06/20 10:05
 
 You will learn how to use MicroProfile Health to report the health status of microservices and take
 appropriate actions based on this report.
@@ -68,7 +69,6 @@ curl http://localhost:9080/system/properties
 {: codeblock}
 
 
-- http://localhost:9080/system/properties[http://localhost:9080/system/properties^]
 
 - 
 ```
@@ -77,7 +77,6 @@ curl http://localhost:9080/inventory/systems
 {: codeblock}
 
 
-- http://localhost:9080/inventory/systems[http://localhost:9080/inventory/systems^]
 
 Visit the 
 ```
@@ -86,7 +85,6 @@ curl http://localhost:9080/health
 {: codeblock}
 
  URL to see the
-Visit the http://localhost:9080/health[http://localhost:9080/health^] URL to see the
 overall health status of the application, as well as the aggregated data of the liveness
 and readiness checks. Two checks show the state of the **system** service, and the other two
 checks show the state of the **inventory** service. As you might expect, both services are in the
@@ -99,7 +97,6 @@ curl http://localhost:9080/health/ready
 {: codeblock}
 
 
-You can also access the **/health/ready** endpoint by visiting the http://localhost:9080/health/ready[http://localhost:9080/health/ready^]
 URL to view the data from the readiness health checks. Similarly, access the **/health/live**
 endpoint by visiting the 
 ```
@@ -108,7 +105,6 @@ curl http://localhost:9080/health/live
 {: codeblock}
 
 
-endpoint by visiting the http://localhost:9080/health/live[http://localhost:9080/health/live^]
 URL to view the data from the liveness health checks.
 
 After you are finished checking out the application, stop the Open Liberty server by pressing `CTRL+C` in the shell session where you ran the server. Alternatively, you can run the `liberty:stop` goal from the `finish` directory in another shell session:
@@ -217,7 +213,6 @@ curl http://localhost:9080/health
 {: codeblock}
 
 
-Dependency Injections API, the bean is discovered automatically when the http://localhost:9080/health[http://localhost:9080/health^]
 endpoint receives a request.
 
 The **call()** method is used to return the health status of a particular service.
@@ -361,7 +356,6 @@ the **inventory** service is healthy.
 If you are curious about the injected **inventoryConfig** object or if
 you want more information on MicroProfile Config, see
 [Configuring microservices](https://openliberty.io/guides/microprofile-config.html).
-https://openliberty.io/guides/microprofile-config.html[Configuring microservices^].
 
 Create the `InventoryLivenessCheck` class.
 ```
@@ -422,7 +416,6 @@ curl http://localhost:9080/health
 {: codeblock}
 
  URL to find
-While the server is running, navigate to the http://localhost:9080/health[http://localhost:9080/health^] URL to find
 the aggregated liveness and readiness health reports on the two services.
 
 You can also navigate to the 
@@ -432,7 +425,6 @@ curl http://localhost:9080/health/ready
 {: codeblock}
 
 
-You can also navigate to the http://localhost:9080/health/ready[http://localhost:9080/health/ready^]
 URL to view the readiness health report, or the 
 ```
 curl http://localhost:9080/health/live
@@ -440,7 +432,6 @@ curl http://localhost:9080/health/live
 {: codeblock}
 
 
-URL to view the readiness health report, or the http://localhost:9080/health/live[http://localhost:9080/health/live^]
 URL to view the liveness health report.
 
 Put the **inventory** service in maintenance by setting the **io_openliberty_guides_inventory_inMaintenance**
@@ -452,7 +443,6 @@ curl http://localhost:9080/health
 {: codeblock}
 
 
-this configuration file is picked up dynamically, simply refresh the http://localhost:9080/health[http://localhost:9080/health^]
 URL to see that the state of the **inventory** service changed to **DOWN**. The
 overall state of the application also changed to **DOWN** as a result. Go to the
 
@@ -462,7 +452,6 @@ curl http://localhost:9080/inventory/systems
 {: codeblock}
 
  URL to verify that the `inventory` service is
-http://localhost:9080/inventory/systems[http://localhost:9080/inventory/systems^] URL to verify that the **inventory** service is
 indeed in maintenance. Set the **io_openliberty_guides_inventory_inMaintenance**
 property back to **false** after you are done.
 
