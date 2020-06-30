@@ -2,7 +2,7 @@
 # Enabling distributed tracing in microservices
 ## What you'll learn
 
-Testing conversion 23/06/2020 15:22
+Testing conversion 30/06/2020 10:03
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
@@ -52,13 +52,11 @@ The **start** directory contains the starting project that you will build upon.
 
 For this guide, use Zipkin as your distributed tracing system. You can find the installation instructions
 for Zipkin at the Zipkin [quickstart page](https://zipkin.io/pages/quickstart.html). You are not required
-for Zipkin at the Zipkin https://zipkin.io/pages/quickstart.html[quickstart page^]. You are not required
 to use Zipkin, but keep in mind that you might need more instructions that are not listed here if you choose
 to use another tracing system.
 
 Before you proceed, make sure that your Zipkin server is up and running. By default, Zipkin can be found
 at the [zipkin-url](zipkin-url) URL.
-at the {zipkin-url}[{zipkin-url}^] URL.
 
 
 ### Try what you'll build
@@ -84,16 +82,14 @@ mvn liberty:start-server
 
 Make sure that your Zipkin server is running and point your browser to the 
 ```
-curl `inv-url/localhost`
+curl inv-url/localhost
 ```
 {: codeblock}
 
  URL. 
-Make sure that your Zipkin server is running and point your browser to the {inv-url}/localhost[{inv-url}/localhost^] URL. 
 When you visit this endpoint, you make two GET HTTP requests, one to the **system** service and one to the **inventory**
 service. Both of these requests are configured to be traced, so a new trace will be recorded in Zipkin.
 Visit the [zipkin-url](zipkin-url) URL or another location where you configured Zipkin to run and sort the traces
-Visit the {zipkin-url}[{zipkin-url}^] URL or another location where you configured Zipkin to run and sort the traces
 by newest first. Verify that this new trace contains three spans with the following names:
 
 - **get:io.openliberty.guides.inventory.inventoryresource.getpropertiesforhost**
@@ -145,9 +141,7 @@ mvn liberty:start-server
 When the servers start, you can find the **system** and **inventory** services at the following URLs:
 
 - [sys-url](sys-url)
-- {sys-url}[{sys-url}^]
 - [inv-url](inv-url)
-- {inv-url}[{inv-url}^]
 
 
 # Existing Tracer implementation
@@ -164,7 +158,6 @@ The **download-maven-plugin** Maven plug-in in your **pom.xml** is responsible f
 
 If you want to install this feature yourself, see
 [Enabling distributed tracing](https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_dist_tracing.html)
-https://www.ibm.com/support/knowledgecenter/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/twlp_dist_tracing.html[Enabling distributed tracing^]
 in the IBM Knowledge Centre.
 
 
@@ -283,7 +276,6 @@ mvn compile
 
 Point to the
 [inv-url](inv-url) URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
-{inv-url}[{inv-url}^] URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
 that is two spans long with one span for the **listContents()** JAX-RS method in the **InventoryResource**
 class and another span for the **list()** method in the **InventoryManager** class. Verify that these spans
 have the following names:
@@ -301,15 +293,6 @@ Update the `InventoryResource` class
 
 
 ```
- * Copyright (c) 2017, 2020 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - Initial implementation
- *******************************************************************************/
 package io.openliberty.guides.inventory;
 
 import java.util.Properties;
@@ -371,7 +354,6 @@ mvn compile
 
 Point to the
 [inv-url](inv-url) URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
-{inv-url}[{inv-url}^] URL, check your Zipkin server, and sort the traces by newest first. You see a new trace record
 that is just one span long for the remaining **list()** method in the **InventoryManager** class. Verify
 that this span has the following name:
 
@@ -465,12 +447,11 @@ mvn compile
 Point to the
 
 ```
-curl `inv-url/localhost`
+curl inv-url/localhost
 ```
 {: codeblock}
 
  URL, check your Zipkin server, and sort the traces by newest first. You see two new
-{inv-url}/localhost[{inv-url}/localhost^] URL, check your Zipkin server, and sort the traces by newest first. You see two new
 trace records, one for the **system** service and one for the **inventory** service. The **system** trace 
 contains one span for the **getProperties()** method in the **SystemResource** class. The **inventory** 
 trace contains two spans. The first span is for the **getPropertiesForHost()** method in the **InventoryResource** 
