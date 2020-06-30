@@ -2,7 +2,7 @@
 # Enabling distributed tracing in microservices
 ## What you'll learn
 
-Testing conversion 30/06/2020 10:03
+Testing conversion 30/06/2020 16:24
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
@@ -59,7 +59,7 @@ Before you proceed, make sure that your Zipkin server is up and running. By defa
 at the [zipkin-url](zipkin-url) URL.
 
 
-### Try what you'll build
+### Try what you'll build DEMO
 
 The **finish** directory in the root directory of this guide contains two services that are configured
 to use MicroProfile OpenTracing. Feel free to give them a try before you proceed.
