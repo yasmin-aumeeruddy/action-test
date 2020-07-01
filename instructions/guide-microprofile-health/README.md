@@ -2,8 +2,6 @@
 # Adding health reports to microservices
 ## What you'll learn
 
-Testing conversion 30/06/20 16:21
-
 You will learn how to use MicroProfile Health to report the health status of microservices and take
 appropriate actions based on this report.
 
