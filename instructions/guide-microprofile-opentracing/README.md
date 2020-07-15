@@ -2,7 +2,7 @@
 # Enabling distributed tracing in microservices
 ## What you'll learn
 
-Testing conversion 15/07/2020 13:51
+Testing conversion 15/07/2020 16:34
 
 You will learn how to enable automatic tracing for JAX-RS methods as well as create custom tracers
 for non-JAX-RS methods by using MicroProfile OpenTracing.
