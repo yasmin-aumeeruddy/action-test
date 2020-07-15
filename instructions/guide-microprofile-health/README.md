@@ -2,7 +2,7 @@
 # Adding health reports to microservices
 ## What you'll learn
 
-Demo action test 15/07 10:18am
+Demo action test 15/07 16:35
 
 You will learn how to use MicroProfile Health to report the health status of microservices and take
 appropriate actions based on this report.
