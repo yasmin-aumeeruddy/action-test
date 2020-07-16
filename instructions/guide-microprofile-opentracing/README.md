@@ -59,7 +59,7 @@ Before you proceed, make sure that your Zipkin server is up and running. By defa
 at the [zipkin-url](zipkin-url) URL.
 
 
-### Try what you'll build DEMO
+### Try what you'll build
 
 The **finish** directory in the root directory of this guide contains two services that are configured
 to use MicroProfile OpenTracing. Feel free to give them a try before you proceed.
