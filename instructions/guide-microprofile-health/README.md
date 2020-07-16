@@ -2,7 +2,7 @@
 # Adding health reports to microservices
 ## What you'll learn
 
-Demo action test 15/07 16:35
+Demo action test 16/07 14:10
 
 You will learn how to use MicroProfile Health to report the health status of microservices and take
 appropriate actions based on this report.
@@ -594,6 +594,7 @@ run automatically as a part of the integration test suite.
 
 You see the following output:
 
+```
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
@@ -607,6 +608,8 @@ You see the following output:
 [INFO] Results:
 [INFO]
 [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+----```
+
 
 To see whether the tests detect a failure, manually change the configuration of
 **io_openliberty_guides_inventory_inMaintenance** from **false** to **true**
