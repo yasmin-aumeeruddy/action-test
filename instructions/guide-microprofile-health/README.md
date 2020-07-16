@@ -595,7 +595,7 @@ run automatically as a part of the integration test suite.
 You see the following output:
 
 ```
-+inputLine
+[INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running it.io.openliberty.guides.health.HealthIT
