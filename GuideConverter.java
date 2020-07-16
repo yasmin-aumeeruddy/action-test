@@ -333,6 +333,23 @@ public class GuideConverter{
                     continue;
                 }
 
+                if(position.equals("testBlock")){
+                    if(!inputLine.startsWith("[INFO]")){
+                        writeToFile(inputLine+"```\n",guideName);
+                        position = "main";
+                    }
+                    else{
+                        writeToFile(inputLine,guideName);
+                    }
+                    continue;
+                }
+                
+                if(inputLine.startsWith("[INFO]")){
+                    position = "testBlock";
+                    writeToFile("```\n"+inputLine,guideName);
+                    continue;
+                }
+
                 if(inputLine.equals("```")){
                     position = "code";
                     continue;
