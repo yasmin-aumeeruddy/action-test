@@ -335,7 +335,7 @@ public class GuideConverter{
 
                 if(position.equals("testBlock")){
                     if(!inputLine.startsWith("[INFO]")){
-                        writeToFile(inputLine+"```\n",guideName);
+                        writeToFile("```\n",guideName);
                         position = "main";
                     }
                     else{
@@ -346,7 +346,7 @@ public class GuideConverter{
                 
                 if(inputLine.startsWith("[INFO]")){
                     position = "testBlock";
-                    writeToFile("```\n",guideName);
+                    writeToFile("```\n+inputLine",guideName);
                     continue;
                 }
 
