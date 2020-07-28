@@ -369,7 +369,7 @@ public class GuideConverter{
                         continue;
                     }
                     else if(inputLine.startsWith("mvn")){
-                        writeToFile("```\n"+inputLine+"\n```\n{codeblock}\n\n",guideName);
+                        writeToFile("```\n"+inputLine+"\n```\n{: codeblock}\n\n",guideName);
                         continue;
                     }
                     else{
